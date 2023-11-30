@@ -1,47 +1,44 @@
+import axios from 'axios';
+
 const api = {
     hostname: `http://localhost:3001/api`,
     async registerUser(data) {
-      const response = await fetch(`${this.hostname}/user`, {
-        body: JSON.stringify(data),
-        headers: new Headers({
-          "Content-type": "application/json",
-          "if-none-match": "",
-        }),
-        method: "POST",
+      const response = await axios.post(`${this.hostname}/user`, data, {
+        headers: {
+          'Content-type': 'application/json',
+          'if-none-match': '',
+        },
       });
-      return await response.json();
+      return response.data;
     },
-    async getUser(){
-      const response = await fetch(`${this.hostname}/user`, {
-        headers: new Headers({
-          "Content-type": "application/json",
-          "if-none-match": "",
-        }),
-        method: "GET",
+    async getUser() {
+      const response = await axios.get(`${this.hostname}/user`, {
+        headers: {
+          'Content-type': 'application/json',
+          'if-none-match': '',
+        },
       });
-      return await response.json();
+      return response.data;
     },
     async editUser(data) {
-      const response = await fetch(`${this.hostname}/user/${data.id}`, {
-        body: JSON.stringify(data),
-        headers: new Headers({
-          "Content-type": "application/json",
-          "if-none-match": "",
-        }),
-        method: "PUT",
+      const response = await axios.put(`${this.hostname}/user/${data.id}`, data, {
+        headers: {
+          'Content-type': 'application/json',
+          'if-none-match': '',
+        },
       });
-      return await response.json();
+      return response.data;
     },
+  
     async deleteUser(data) {
-      const response = await fetch(`${this.hostname}/user/${data.id}`, {
-        body: JSON.stringify(data),
-        headers: new Headers({
-          "Content-type": "application/json",
-          "if-none-match": "",
-        }),
-        method: "DELETE",
+      const response = await axios.delete(`${this.hostname}/user/${data.id}`, {
+        headers: {
+          'Content-type': 'application/json',
+          'if-none-match': '',
+        },
+        data: JSON.stringify(data),
       });
-      return await response.json();
+      return response.data;
     },
   };
   export default api;
